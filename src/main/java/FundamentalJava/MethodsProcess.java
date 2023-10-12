@@ -9,6 +9,7 @@ public class MethodsProcess
     }
     public static void main(String[] args)
     {
+        int age;
         System.out.println("----------Zealous Tech Corp------------");
 //        classname objname=new classname();
         MethodsProcess obj=new MethodsProcess();
