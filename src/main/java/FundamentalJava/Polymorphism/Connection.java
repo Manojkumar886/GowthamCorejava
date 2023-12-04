@@ -8,7 +8,7 @@ public class Connection
         ani.dog();
         ani.Lion();
 
-        Animal1  ani2=new Animal2();
+        Animal1  ani2=new Animal2();//upcasting+
         ani2.dog();
         ani2.Lion();
     }
