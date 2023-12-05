@@ -38,6 +38,6 @@ public class DemoStringclass
 
         String content="           i am manojkumar         ";
         System.out.println(content);
-        System.out.println(content.trim());
+        System.out.println(content.trim());//remove unwanted whitespace
     }
 }
