@@ -1,11 +1,16 @@
 package FundamentalJava.Looping;
 
+import FundamentalJava.Modifiers.access;
+
 import java.util.Scanner;
 
-public class latecomercount
+public class latecomercount extends access
 {
     public static void main(String[] args)
     {
+        access obj=new access();
+        obj.Access1();
+//        def d=new def(); def class is default
         int staffcount=10;
         int latecomercount=0;
         do
