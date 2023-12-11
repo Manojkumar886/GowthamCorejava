@@ -9,7 +9,6 @@ public class DemoArraylistVector
     public static void main(String[] args)
     {
         ArrayList<Character> Alpha=new ArrayList<Character>();
-
         Alpha.add('Z');
         Alpha.add('E');
         Alpha.add('A');
