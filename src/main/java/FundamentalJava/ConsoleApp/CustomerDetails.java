@@ -2,7 +2,7 @@ package FundamentalJava.ConsoleApp;
 
 import java.io.Serializable;
 
-public class CustomerDetails implements Serializable
+public class CustomerDetails implements Serializable,Comparable<CustomerDetails>
 {
     private int cus_Id;
     private String cus_Name;
@@ -78,5 +78,11 @@ public class CustomerDetails implements Serializable
 
     public void setCus_Mobileno(long cus_Mobileno) {
         this.cus_Mobileno = cus_Mobileno;
+    }
+
+    @Override
+    public int compareTo(CustomerDetails o)
+    {
+        return o.getCus_Name().compareTo(this.cus_Name);
     }
 }

@@ -1,24 +1,27 @@
 package FundamentalJava.ConsoleApp;
 
 import java.io.*;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.*;
 
-public class CustomerDetailsActivation  implements  CustomerDetailsInter,Runnable
+public class CustomerDetailsActivation extends CustomerDetailsException  implements  CustomerDetailsInter,Runnable
 {
 
     File file=new File("D:\\CustomerDetails.doc");
 
     static Scanner scan=new Scanner(System.in);
 
-    LinkedList<CustomerDetails> customer=new LinkedList<CustomerDetails>();
-
-    public CustomerDetailsActivation()
-    {
-        customer=new LinkedList<CustomerDetails>();
-    }
-
+//    LinkedList<CustomerDetails> customer=new LinkedList<CustomerDetails>();
+//
+//    public CustomerDetailsActivation()
+//    {
+//        FileOutputStream fos=new FileOutputStream(file);
+//        ObjectOutputStream oos=new ObjectOutputStream(fos);
+//        oos.writeObject(customer);
+//        oos.close();
+//        fos.close();
+//        customer.add(new CustomerDetails(1001,"Manoj","Namakkal",8097564534l,564567874565l,9789255930l));
+//    }
+    LinkedList<CustomerDetails> customer=null;
     public void Affect() throws IOException
     {
         FileOutputStream fos=new FileOutputStream(file);
@@ -48,24 +51,68 @@ public class CustomerDetailsActivation  implements  CustomerDetailsInter,Runnabl
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        return  "";
+        return customer1.getCus_Name()+" has been added in MY BANK";
     }
 
     @Override
     public void ListallCustomers()
     {
+        try
+        {
+            FETCH();
+            Iterator<CustomerDetails> it= customer.iterator();
+            do {
+                System.out.println(it.next());
+            }while (it.hasNext());
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
     @Override
-    public void DeleteCustomer(int cusid)
-    {
+    public void DeleteCustomer(int cusid) {
+        try{
+                FETCH();
+                for (int i = 0; i < customer.size(); i++) {
+                    if (customer.get(i).getCus_Id() == cusid) {
+                        customer.remove(i);
+                        try {
+                            Affect();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        System.out.println(cusid + " has been deleeted successfully");
+                    }
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (NoSuchElementException nse) {
+                System.out.println(nse);
+            }
 
-    }
+
+        }
 
     @Override
     public void Sort()
     {
+        try {
+            FETCH();
+            Collections.sort(customer);
+            Affect();
+            System.out.println(" Your values is sorted");
+            ListallCustomers();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -91,8 +138,12 @@ public class CustomerDetailsActivation  implements  CustomerDetailsInter,Runnabl
                     activate.ListallCustomers();
                     break;
                 case 3:
+                    activate.Sort();
                     break;
                 case 4:
+                    System.out.println(" which cus_id you want delete ");
+                    int cusno=scan.nextInt();
+                    activate.DeleteCustomer(cusno);
                     break;
                 case 5:
                     return;
